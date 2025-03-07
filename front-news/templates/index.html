@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Website</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        h1 { color: #333; }
+        form { margin-bottom: 20px; }
+        .news-container { display: flex; flex-wrap: wrap; justify-content: center; }
+        .news-card {
+            width: 300px; margin: 10px; padding: 15px; border: 1px solid #ddd;
+            border-radius: 8px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        img { width: 100%; border-radius: 8px; }
+        .category {
+            font-size: 23px;
+            padding: -34px;
+            padding: 7px;
+            border-radius: 50px;
+        }
+
+        .category_btn {
+            font-size: 25px;
+            border-radius: 47px;
+            background-color: #17C1F7;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Latest News on {{ category }}</h1>
+
+    <!-- Search Form -->
+    <form method="POST">
+        <input type="text" name="category" class="category" placeholder="Enter topic (e.g., sports, market, tech)">
+        <button class="category_btn" type="submit">Search</button>
+    </form>
+
+    <div class="news-container">
+        {% for article in articles %}
+        <div class="news-card">
+            <img src="{{ article['urlToImage'] }}" alt="News Image">
+            <h3>{{ article['title'] }}</h3>
+            <p><strong>Source:</strong> {{ article['source']['name'] }}</p>
+            <p>{{ article['description'] }}</p>
+            <a href="{{ article['url'] }}" target="_blank">Read More</a>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
